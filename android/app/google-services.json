@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1066868163408",
+    "project_id": "flutterfirebasealura-d22f1",
+    "storage_bucket": "flutterfirebasealura-d22f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066868163408:android:2bdc964a7473830c57a255",
+        "android_client_info": {
+          "package_name": "com.example.projetofirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCkaK-_OBZ6UsptKn803xtwsQR9KiAAII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
