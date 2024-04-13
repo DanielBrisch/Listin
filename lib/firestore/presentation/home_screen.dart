@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:projetofirebase/firestore_produtos/presentation/produto_screen.dart';
 import 'package:uuid/uuid.dart';
 import '../models/listin.dart';
 
@@ -25,7 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Listin - Feira Colaborativa"),
+        title: const Text(
+          "Listin - Feira Colaborativa",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.deepOrangeAccent,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -52,19 +57,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     Listin model = listListins[index];
                     return Dismissible(
                       key: ValueKey<Listin>(model),
-                      direction: DismissDirection.endToStart,
-                      onDismissed: (direction) {
-                        remove(model);
+                      direction: DismissDirection.horizontal,
+                      confirmDismiss: (direction) async {
+                        if (direction == DismissDirection.endToStart) {
+                          return true;
+                        } else if (direction == DismissDirection.startToEnd) {
+                          showFormModal(model: model);
+                          return false;
+                        }
+                        return false;
                       },
-                      background: Container(
+                      onDismissed: (direction) {
+                        if (direction == DismissDirection.endToStart) {
+                          remove(model);
+                        }
+                      },
+                      secondaryBackground: Container(
                         padding: const EdgeInsets.only(right: 50.0),
                         alignment: Alignment.centerRight,
                         color: Colors.red,
                         child: const Icon(Icons.delete, color: Colors.white),
                       ),
+                      background: Container(
+                        padding: const EdgeInsets.only(left: 50.0),
+                        alignment: Alignment.centerLeft,
+                        color: Colors.blue,
+                        child: const Icon(Icons.edit, color: Colors.white),
+                      ),
                       child: ListTile(
                         onLongPress: () {
-                          showFormModal(model: model);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProdutoScreen(listin: model)));
                         },
                         leading: const Icon(Icons.list_alt_rounded),
                         title: Text(model.name),
